@@ -1,3 +1,9 @@
+/* solution:
+* - use hashmap to store the songId and the numPlays
+* - use priority queue to show the top n songs played
+* - create a class "Pair" that implement Comparable, so that it can compare the object by its num of play & its id in desc/asc order
+*/
+
 
 class Pair implements Comparable<Pair>{
     String str;
