@@ -29,7 +29,9 @@ class SongCacheImpl implements SongCache{
 
     @Override
     public int getPlaysForSong(String songId) {
-        if(songId == null || !map.containsKey(songId)) return -1;
+       if(songId == null || songId.length()== 0 || !map.containsKey(songId)) {
+           return -1;
+       }
         return map.get(songId);
     }
 
