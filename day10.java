@@ -44,11 +44,7 @@ class SongCacheImpl implements SongCache{
             }
         }
 
-        if (queue.isEmpty()) {
-            System.out.println("queue is empty");
-            return null;
-        }
-
+   
         String[] arr = new String[n];
         for (int i = n - 1; i >= 0; i--) {
             arr[i] = (queue.poll().str);
