@@ -21,7 +21,7 @@ public class Clazz {
     private Integer class_id;
 
 
-    @OneToMany(mappedBy = "clazz", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = false)
+    @OneToMany(mappedBy = "clazz", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Enrollment> enrollmentSet = new ArrayList<>();
 
     public List<Enrollment> getEnrollmentSet() {

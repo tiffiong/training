@@ -12,11 +12,14 @@ public class Main {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
 //        insertToClass(entityManager);
- //       addToEnrollment(entityManager);
-        getClassById(entityManager);
-  //      updateStudent(entityManager);
-    //      readStudentAge(entityManager);
- //         removeRelation(entityManager);
+//        addToEnrollment(entityManager);
+//
+//        getClassById(entityManager);
+//        updateStudentAge(entityManager);
+//
+//
+//        orphanRemove(entityManager);
+        removeSingleRelation(entityManager);
 
 
     }
@@ -39,14 +42,18 @@ public class Main {
         transaction.begin();
 
         Clazz clazz = new Clazz();
-        clazz.setClass_name("Math");
+        clazz.setClass_name("English");
 
         Student student = new Student();
-        em.persist(student);
+        //new student
+//        em.persist(student);
 
         student.setAge(27);
         student.setLast_name("Dickson");
         student.setFirst_name("Matthew");
+        //existed student
+        student.setStudentId(128);
+        em.merge(student);
 
         Enrollment enrollment = new Enrollment();
         enrollment.setClazz(clazz);
@@ -77,34 +84,33 @@ public class Main {
         System.out.println(c);
     }
 
-    private static void readStudentAge(EntityManager em) {
-        Query query = em.createQuery("select s.first_name, s.age from Student s where s.age > ?1");
-        query.setParameter(1, 20);
-        List<Student> result = query.getResultList();
-        System.out.println(result);
-
-    }
 
 
-    private static  void removeRelation(EntityManager em){
+    private static  void removeSingleRelation(EntityManager em){
+        //orphanRemoval = false;
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
 
-        Query query =  em.createNativeQuery("select c from Clazz c join fetch c.enrollmentSet cenroll where c.class_id = ?1");
-        query.setParameter(1, 222);
+        Query query = em.createQuery("select c from Clazz c left join fetch c.enrollmentSet e where c.class_id =?1");
+        query.setParameter(1, 226);
+
         Clazz c = (Clazz) query.getSingleResult();
-        Student s = em.find(Student.class, 125);
-        List<Enrollment> enroll = new ArrayList<>();
-        for (Enrollment e : c.getEnrollmentSet()){
-            if(e.getStudent().getStudentId().equals(s.getStudentId())) {
-                enroll.add(e);
-                System.out.println(e.getEnroll_id());
-                em.remove(e);
-            }
+        for(Enrollment e: c.getEnrollmentSet()) {
+            em.remove(e);
         }
-        c.getEnrollmentSet().removeAll(enroll);
-        s.getEnrollmentSet().removeAll(enroll);
+        c.setEnrollmentSet(new ArrayList<>());
         transaction.commit();
+
+    }
+
+    private static void orphanRemove(EntityManager em){
+        //orphanRemoval = true;
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        Clazz c = em.find(Clazz.class, 223);
+        c.getEnrollmentSet().remove(0);
+        transaction.commit();
+
 
     }
 
