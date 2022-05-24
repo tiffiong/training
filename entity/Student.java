@@ -1,4 +1,4 @@
-package entity;
+package com.tiffanyiong.demo.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
