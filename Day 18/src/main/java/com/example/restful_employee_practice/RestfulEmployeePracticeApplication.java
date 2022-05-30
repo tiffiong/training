@@ -1,13 +1,13 @@
-package com.tiffiong.employee_api;
+package com.example.restful_employee_practice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class EmployeeApiApplication {
+public class RestfulEmployeePracticeApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(EmployeeApiApplication.class, args);
+        SpringApplication.run(RestfulEmployeePracticeApplication.class, args);
     }
 
 }

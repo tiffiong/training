@@ -1,22 +1,17 @@
-package com.tiffiong.employee_api.entity;
+package com.example.restful_employee_practice.Enitiy;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-
-@Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class Employee {
-
-    @Id
+@NoArgsConstructor
+public class EmployeeData {
     private Long id;
     private String employee_name;
-    private Integer age;
     private Long employee_salary;
-    private String profile_image;
+    private Integer employee_age;
+
 
 }
