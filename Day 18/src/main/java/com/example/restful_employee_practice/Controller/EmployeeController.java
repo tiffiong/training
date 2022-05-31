@@ -30,13 +30,5 @@ public class EmployeeController {
         return new ResponseEntity<>(employeeService.getEmployeByAge(employee_age), HttpStatus.OK);
     }
 
-    @GetMapping("/client")
-    public Employee getAllEmployees() {
-        String url = "http://dummy.restapiexample.com/api/v1/employees";
-        RestTemplate restTemplate = new RestTemplate();
-        Employee employee = restTemplate.getForObject(url, Employee.class);
-        System.out.println(employee);
-        return employee;
-    }
 
 }
